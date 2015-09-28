@@ -1,7 +1,7 @@
 #lang racket
 
 (define (f-recursive n)
-  (if (< n 3) 
+  (if (< n 3)
       n
       (+ (f-recursive (- n 1))
          (* 2 (f-recursive (- n 2)))
