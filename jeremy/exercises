@@ -1,0 +1,18 @@
+1.4:
+
+returns a + |b|
+
+1.5:
+
+Applicative-order evaluation will produce a stack overflow;
+normal-order evaluation will produce 0, because applicative-order
+will evaluate the arguments before passing them to test, and (p)
+will repeatedly call itself without ending, leading to a stack
+overflow.
+
+1.6
+
+new-if will cause sqrt-iter to recurse forever, because on each
+call to it, new-if will cause the evaluation of both the then-clause
+and the else-clause, which will cause a recursive call to sqrt-iter,
+and so on.
