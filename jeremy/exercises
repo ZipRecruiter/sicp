@@ -16,3 +16,49 @@ new-if will cause sqrt-iter to recurse forever, because on each
 call to it, new-if will cause the evaluation of both the then-clause
 and the else-clause, which will cause a recursive call to sqrt-iter,
 and so on.
+
+1.9
+
+The first process is recursive (because it needs to keep track of
+the need to apply inc after the recursive call to + returns).
+The second process is iterative, because the recursive call to +
+is tail-recursive.
+
+1.10
+
+(define (f n) (A 0 n)) ;; 2*n
+(define (g n) (A 1 n)) ;; 2**n (for n != 0)
+(define (h n) (A 2 n)) ;; 2**(2**(2**...)) for n levels
+
+1.13
+
+Definition of Fibonacci numbers: f(0) = 0, f(1) = 1, f(n) = f(n-1) + f(n-2)
+
+Definition of golden ratios: phi = (1 + sqrt(5)) / 2, psi = (1 - sqrt(5)) / 2
+
+Verify initial conditions of induction:
+    f(0) =? (phi**0 - psi**0) / sqrt(5) == (1 - 1) / sqrt(5) == 0
+    f(1) =? (phi**1 - psi**1) / sqrt(5) == 2*sqrt(5)/2 / sqrt(5) == 1
+
+Inductive step:
+    Assume f(n - 1) = (phi**(n-1) - psi**(n-1)) / sqrt(5) (and likewise for n-2)
+    Then f(n) == f(n-1) + f(n-2) == (phi**(n-1) + phi**(n-2) - psi**(n-1) - psi**(n-2)) / sqrt(5)
+    subtract (phi**n - psi**n) /sqrt(5) from each side:
+    f(n) - (phi**n - psi**n) / sqrt(5) == (-phi**n + phi**(n-1) + phi**(n-2) + psi**n - psi**(n-1) - psi**(n-2)) / sqrt(5)
+    == (phi**n * (-1 + phi**-1 + phi**-2) + psi**n * (1 - psi**-1 - psi**-2))) / sqrt(5)
+    == (phi**n * (-6 -2*sqrt(5) + 2 + 2*sqrt(5) + 4) + psi**n * (6 - 2*sqrt(5) - 2 + 2*sqrt(5) - 4)) / sqrt(5)
+    == (phi**n * 0 + psi**n * 0) / sqrt(5)
+    == 0
+    Therefor, f(n) - (phi**n - psi**n) / sqrt(5) == 0, so f(n) == (phi**n - psi**n) / sqrt(5), proving the inductive step
+
+1.14
+
+...
+
+1.15a
+
+5 times (for calls to sine with parameter 12.15, 4.05, 1.35, 0.45, 0.15, and 0.05
+
+1.15b
+
+O(log(a))
