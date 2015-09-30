@@ -10,8 +10,6 @@
 (define (f-iter n)
         (define (f-iter-iter f-3 f-2 f-1 n)
                 (cond ((= n 0) f-3)
-                      ((= n 1) f-2)
-                      ((= n 2) f-1)
                       (else (f-iter-iter f-2 f-1 (+ f-1 (* 2 f-2) (* 3 f-3)) (- n 1)))))
         (f-iter-iter 0 1 2 n))
 
