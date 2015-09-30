@@ -1,5 +1,5 @@
 This is where members of our ZipRecruiter reading group put our answers
-to the exercises in **Structure and Interpretation of Computer Programs**
+to the exercises in *Structure and Interpretation of Computer Programs*
 (SICP). Each student has their own subdirectory, so you can choose
 whether or not you want to peek at other peoples' work.
 
