@@ -3,5 +3,5 @@ test1:
 test2:
 	raco test ex1-10.rkt ex1-11.rkt ex1-12.rkt
 test3:
-	raco test ex1-16.rkt
+	raco test ex1-16.rkt ex1-17.rkt ex1-18.rkt
 all: test1 test2 test3
