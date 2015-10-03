@@ -85,7 +85,14 @@
         /  |
      1,0  0,1
 
-    O(log(n))?
+    O(n**2)? Because when the amount of money is large enough to allow
+    multiple ways of making change, there's a sub-tree of depth n using
+    pennies, then another sub-tree that starts by using a higher-value
+    coin, then all pennies, and so on. So it's something like a fraction
+    of n * (n-5) (plus smaller additional amounts for trees that start
+    with dimes, quarters, and half-dollars). The branching of the trees
+    is limited by the number of different coins (5) rather than n, so
+    both space and time are O(n**2).
 
 1.15a
 
