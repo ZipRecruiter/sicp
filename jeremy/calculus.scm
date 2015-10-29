@@ -48,6 +48,9 @@
 (define (trapezoid func x1 x2)
     (* (- x2 x1) (+ (func x1) (func x2)) 0.5))
 
+(define (simpsons func x1 x2)
+    (/ (* (- x2 x1) (+ (func x1) (* 4 (func (/ (+ x1 x2) 2))) (func x2))) 6))
+
 (define (integral-with piece func num-steps x1 x2)
     (define (deltax num-steps x1 x2) (/ (- x2 x1) num-steps))
     (define (newx1 num-steps x1 x2) (+ x1 (deltax num-steps x1 x2)))
@@ -64,15 +67,29 @@
 ;; Then check that (integral-with trapezoid ...) produces better answers
 ;; for a given num-steps than the same (integral-with rectangle ...)
 
+(define (square x) (expt x 2))
+
+"rectangle"
+(integral-with rectangle square 100 3 5)
+(exact->inexact (integral-with rectangle square 100 3 5))
+"trapezoid"
+(integral-with trapezoid square 100 3 5)
+"simpsons"
+(integral-with simpsons square 100 3 5)
+(exact->inexact (integral-with simpsons square 100 3 5))
+
 (define problem.3
     (test-suite "Tests for problem 3"
     ;; With only one step, the integral of y = x^2 from 3 to 5
     ;; should be 3^2 * 2 = 18
-    (check-equal? (integral-with rectangle (lambda (x) (expt x 2)) 1 3 5) 18)
+    (check-equal? (integral-with rectangle square 1 3 5) 18)
     ;; With two steps, we should get 3^2 + 4^2 = 25
-    (check-equal? (integral-with rectangle (lambda (x) (expt x 2)) 2 3 5) 25)
-    (check-equal? (integral-with trapezoid (lambda (x) (expt x 2)) 1 3 5) 34.0)
-    (check-= (integral-with trapezoid (lambda (x) (expt x 2)) 100 3 5) 32.6666 0.001)
+    (check-equal? (integral-with rectangle square 2 3 5) 25)
+    (check-equal? (integral-with trapezoid square 1 3 5) 34.0)
+    ;; (3^2 + 4*4^2 + 5^2) / 3 = 98/3
+    (check-equal? (integral-with simpsons square 1 3 5) 98/3)
+    (check-= (integral-with trapezoid square 100 3 5) 32.6666 0.001)
+    (check-= (integral-with simpsons square 100 3 5) 98/3 0.000000000001)
     ))
 
 
@@ -81,10 +98,14 @@
 (define (better-pi num-steps)
     (* 4 (integral-with trapezoid (lambda (x) (sqrt (- 1 (* x x)))) num-steps 0 1)))
 
+(define (best-pi num-steps)
+    (* 4 (integral-with simpsons (lambda (x) (sqrt (- 1 (* x x)))) num-steps 0 1)))
+
 ;; How many digits does (better-pi 600) get correct, compared to
 ;; the earlier (approx-pi 600) ?
 (approx-pi 600)
 (better-pi 600)
+(best-pi 600)
 (define problem.4
     (test-suite "Tests for problem 4"
     (check-= (approx-pi 600) 3.1415926539 0.004)
