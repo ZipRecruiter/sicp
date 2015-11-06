@@ -106,3 +106,8 @@
 
     The result of (f f) is (f 2), which in turn is (2 2), which doesn't
     work because 2 isn't a function!
+
+1.35
+    phi = (1 + sqrt(5)) / 2
+    At fixed point, x == 1 + 1/x, or x**2 == x + 1, or x**2 - x - 1 == 0, or x = (1 +/- sqrt(1 + 4)) / 2 == (1 +/- sqrt(5)) / 2
+    So phi is one of the fixed points, the other is (1 - sqrt(5)) / 2, which is -1/phi and also 1 - phi (because at the fixed point, x - 1 == 1/x)
