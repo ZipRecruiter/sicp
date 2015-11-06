@@ -12,8 +12,10 @@ test5:
 	raco test ex1-30.rkt ex1-31.rkt ex1-32.rkt ex1-34.rkt
 test6:
 	raco test ex1-35.rkt ex1-36.rkt ex1-37.rkt ex1-38.rkt ex1-39.rkt
+test7:
+	raco test ex1-40.rkt
 
 testproject:
 	raco test simple-integration.scm calculus.scm
 
-all: test1 test2 test3 test5 test6 testproject
+all: test1 test2 test3 test5 test6 test7 testproject
