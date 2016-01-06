@@ -41,13 +41,13 @@
 (define s1 (make-segment p1 p2))
 (define p3 (midpoint-segment s1))
 
-(define t2.2
-    (test-suite "Tests for exercise 2.2"
+(define t2.3
+    (test-suite "Tests for exercise 2.3"
     (check-equal? (x-point p3) 3)
     (check-equal? (y-point p3) 1)
 ))
 
 (require rackunit/text-ui)
 
-(run-tests t2.2)
+(run-tests t2.3)
 
